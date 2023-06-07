@@ -16,3 +16,12 @@ class Pet(models.Model):
         choices=Gender.choices,
         default=Gender.DEFAULT,
     )
+
+    group = models.ForeignKey(
+        "groups.Group",
+        on_delete=models.CASCADE,
+        related_name="pets"
+    )
+
+    def __repr__(self) -> str:
+        return f"<[{self.id}] - {self.name}>"
