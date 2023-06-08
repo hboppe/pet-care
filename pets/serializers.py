@@ -4,9 +4,8 @@ from traits.serializers import TraitSerializer
 from groups.serializers import GroupSerializer
 from .models import Pet
 
-class PetSerializer(serializers.Serializer):
+class PetSerializer(serializers.ModelSerializer):
     
-    id = serializers.IntegerField()
     sex = serializers.ChoiceField(
         choices=Gender.choices,
         default=Gender.DEFAULT,
@@ -18,4 +17,6 @@ class PetSerializer(serializers.Serializer):
     class Meta:
         model = Pet
         fields = "__all__"
-        read_only_fields = ["id"]
+        read_only_fields = ["id", "traits"]
+
+
