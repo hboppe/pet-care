@@ -1,9 +1,7 @@
 from rest_framework import serializers
-from .models import Group
 
-class GroupSerializer(serializers.ModelSerializer):
+class GroupSerializer(serializers.Serializer):
 
-    class Meta:
-        model = Group
-        fields = "__all__"
-        read_only_fields = ["id", "created_at"]
+    id = serializers.IntegerField(read_only=True)
+    scientific_name = serializers.CharField(max_length=50)
+    created_at = serializers.DateTimeField(read_only=True)

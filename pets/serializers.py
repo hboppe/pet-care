@@ -3,20 +3,18 @@ from pets.models import Gender
 from traits.serializers import TraitSerializer
 from groups.serializers import GroupSerializer
 from .models import Pet
+from groups.models import Group
 
-class PetSerializer(serializers.ModelSerializer):
+class PetSerializer(serializers.Serializer):
     
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField(max_length=50)
+    age = serializers.IntegerField()
+    weight = serializers.FloatField()
     sex = serializers.ChoiceField(
         choices=Gender.choices,
-        default=Gender.DEFAULT,
+        default=Gender.DEFAULT
     )
 
-    traits = TraitSerializer(many=True)
     group = GroupSerializer()
-    
-    class Meta:
-        model = Pet
-        fields = "__all__"
-        read_only_fields = ["id", "traits"]
-
-
+    traits = TraitSerializer(many=True)
